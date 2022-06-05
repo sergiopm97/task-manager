@@ -4,12 +4,24 @@
 .login-container {
   width: 100%;
   display: flex;
+  position: relative;
   background-position: bottom;
   background-image: url("../media/waveBackground.svg");
   background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  &--registration-completed {
+    top: 0;
+    border-radius: 1rem;
+    color: $success-color;
+    margin: 2rem 2rem auto;
+    background-color: $success-background-color;
+    position: absolute;
+    padding: 1rem;
+    right: 0;
+  }
 
   &__content {
     width: 40rem;
