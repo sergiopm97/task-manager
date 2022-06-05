@@ -68,6 +68,16 @@
             background-color: $light-blue;
           }
         }
+
+        &--error {
+          color: $error-color;
+          background-color: $error-background-color;
+          padding: 0.2rem;
+
+          @include responsive(mobile) {
+            font-size: 0.8rem;
+          }
+        }
       }
 
       &--submit {

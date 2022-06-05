@@ -1,6 +1,12 @@
 import { useFormik } from "formik";
+import * as yup from "yup";
 import { motion } from "framer-motion";
 import "./styles/loginForm.scss";
+
+const RegisterSchema = yup.object().shape({
+  email: yup.string().email("Use a valid email").required("An email is required"),
+  password: yup.string().min(8, "Password must be at least 8 characters long").required("A password is required"),
+});
 
 function LoginForm() {
   const formik = useFormik({
@@ -8,6 +14,7 @@ function LoginForm() {
       email: "",
       password: "",
     },
+    validationSchema: RegisterSchema,
     onSubmit: (values) => {
       console.log(values.email);
       console.log(values.password);
@@ -29,13 +36,15 @@ function LoginForm() {
             </label>
             <input
               className="login-container__content__form__field--input"
-              type="email"
               id="email"
               name="email"
               autoComplete="off"
               onChange={formik.handleChange}
               value={formik.values.email}
             ></input>
+            {formik.touched.email && formik.errors.email && (
+              <span className="login-container__content__form__field--error">{formik.errors.email}</span>
+            )}
           </div>
           <div className="login-container__content__form__field">
             <label className="login-container__content__form__field--label" htmlFor="password">
@@ -49,8 +58,10 @@ function LoginForm() {
               autoComplete="off"
               onChange={formik.handleChange}
               value={formik.values.password}
-              minLength="6"
             ></input>
+            {formik.touched.password && formik.errors.password && (
+              <span className="login-container__content__form__field--error">{formik.errors.password}</span>
+            )}
           </div>
           <button className="login-container__content__form--submit" type="submit">
             Register
